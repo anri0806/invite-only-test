@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    belongs_to :group
+    # has_many :posts, dependent: :destroy
+
     has_secure_password
-    validates :username, :password_digest, presence: true
+    validates :username, :email, presence: true
 end

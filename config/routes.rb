@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   # Leave this here to help deploy your app later!
 
   resources :users, only: [:index]
+  resources :posts, only: [:index, :show, :create, :destroy]
+  resources :groups, only: [:index, :create]
 
+  post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"

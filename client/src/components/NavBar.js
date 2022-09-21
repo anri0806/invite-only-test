@@ -11,7 +11,7 @@ function NavBar({ currentUser, onLogout }) {
     <>
       {currentUser ? (
         <>
-          <Link to="feed">Feed</Link>|{" "}
+          <Link to="/">Feed</Link>|{" "}
           <Link onClick={handleClick}>
             Logout
           </Link>

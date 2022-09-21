@@ -6,7 +6,6 @@ function Login({ onLogin }) {
     password: "",
   });
   const [error, setError] = useState(null);
-  
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });

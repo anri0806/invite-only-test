@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
+
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {

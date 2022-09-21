@@ -9,7 +9,7 @@ function WelcomeContainer({ onLogin }) {
       <p>Welcome Container</p>
       <Routes>
         <Route path="/" element={<Login onLogin={onLogin} />} />
-        <Route path="register" element={<Register />} />
+        <Route path="register" element={<Register onLogin={onLogin} />} />
       </Routes>
     </div>
   );
