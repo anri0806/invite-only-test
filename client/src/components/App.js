@@ -31,7 +31,7 @@ function App() {
     <div>
       <NavBar currentUser={currentUser} onLogout={handleLogout} />
       {currentUser ? (
-        <HomeContainer />
+        <HomeContainer currentUser={currentUser} />
       ) : (
         <WelcomeContainer
           currentUser={currentUser}

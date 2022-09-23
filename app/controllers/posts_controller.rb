@@ -1,17 +1,40 @@
 class PostsController < ApplicationController
+    skip_before_action :authorize, only: [:index]
 
     def index
         posts = Post.all
-        render json: posts
+        render json: posts, status: :ok
     end
 
-    # def show
-    # end
+    def show
+        post = Post.find_by(id: params[:id])
+        render json: post, status: :ok
+    end
 
-    # def create
-    # end
+    def create
+        post = Post.create(post_params)
+        if post.valid?
+            render json: post, status: :created
+        else
+            render json: {errors: post.errors.full_messages}, status: :unprocessable_entity
+        end
+    end
 
-    # def destroy
-    # end
+    def destroy
+        post = Post.find_by(id: params[:id])
+        if post
+            post.destroy
+            head :no_content
+        else
+            render json: {error: "Post not fonud"}, status: :not_found
+        end
+        
+    end
+
+    private
+
+    def post_params
+        params.permit(:caption, :user_id, :picture)
+    end
 
 end
