@@ -1,12 +1,14 @@
 import Post from "./Post";
 
-function PostCard({ posts }) {
-  const postCards = posts.map((post) => <Post key={post.id} post={post} />);
+function PostCard({ posts, onClickDelete }) {
+  const postCards = posts.map((post) => (
+    <Post key={post.id} post={post} onClickDelete={onClickDelete} />
+  ));
 
   return (
     <>
-      <p>this is post cards</p>
       {postCards}
+      {/* <Post post={post} onClickDelete={onClickDelete} /> */}
     </>
   );
 }

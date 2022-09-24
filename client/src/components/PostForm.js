@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-function PostForm({ currentUser }) {
+function PostForm({ currentUser, onSubmitAdd }) {
   const [caption, setCaption] = useState("");
   const [picture, setPicture] = useState(null);
+  const [errors, setErrors] = useState([]);
+
+  const ref = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -10,14 +13,23 @@ function PostForm({ currentUser }) {
     const formData = new FormData();
     formData.append("user_id", currentUser.id);
     formData.append("caption", caption);
-    formData.append("picture", picture);
+    if (picture) formData.append("picture", picture);
 
     fetch("/posts", {
       method: "POST",
       body: formData,
-    })
-      .then((res) => res.json())
-      .then((newPost) => console.log(newPost));
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((newPost) => onSubmitAdd(newPost));
+      } else {
+        res.json().then((err) => setErrors(err.errors));
+      }
+    });
+
+    setCaption("");
+    ref.current.value = "";
+    setPicture(null);
+    setErrors([])
   }
 
   return (
@@ -33,6 +45,7 @@ function PostForm({ currentUser }) {
         <br />
         <input
           onChange={(e) => setPicture(e.target.files[0])}
+          ref={ref}
           type="file"
           name="picture"
           placeholder="Add picture"
@@ -40,6 +53,13 @@ function PostForm({ currentUser }) {
         <br />
         <button>Post</button>
       </form>
+      {errors ? (
+        <>
+          {errors.map((err) => (
+            <p key={err}>{err}</p>
+          ))}
+        </>
+      ) : null}
     </>
   );
 }
