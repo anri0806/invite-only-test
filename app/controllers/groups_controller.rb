@@ -1,10 +1,15 @@
 class GroupsController < ApplicationController
-    skip_before_action :authorize, only: [:index, :create]
+    skip_before_action :authorize, only: [:index, :show, :create]
 
 
     def index
         groups = Group.all
         render json: groups
+    end
+
+    def show
+        group = Group.find_by(id: params[:id])
+        render json: group, status: :ok
     end
 
     def create

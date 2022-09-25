@@ -9,12 +9,20 @@
 puts "seeding...🌱"
 
 
-g1 = Group.create(group_name: "Brooks Family", how_many_members: 1, created_at: "2022-9-12" )
-#add members column later through controller or serializer
+g1 = Group.create(group_name: "Brooks Family", created_at: "2022-9-12")
+g2 = Group.create(group_name: "Husky Basketball Team", created_at: "2022-9-15")
 
 u1 = User.create(username: "Stephanie", email: "steph@gmail.com", password: "12345", admin: true, created_by_invite: false, group_id: g1.id)
+u2 = User.create(username: "Dylan", email: "dylan@gmail.com", password: "abcde", admin: false, created_by_invite: true, group_id: g1.id)
+u3 = User.create(username: "Tiffany", email: "tiffany@gmail.com", password: "11111", admin: true, created_by_invite: false, group_id: g2.id)
+u4 = User.create(username: "Sarah", email: "sarah@gmail.com", password: "22222", admin: false, created_by_invite: true, group_id: g2.id)
+
 
 p1 = Post.create(caption: "Hello Brooks Family!", created_at: "2022-9-13 9:00AM", user_id: u1.id )
-#no image and updated_at
+p2 = Post.create(caption: "Post anything related to our team here. (i.e. practice schedule, pictures, etc.)", created_at: "2022-9-16 12:00PM", user_id: u3.id )
+
+c1 = Comment.create(content: "Thank you for inviting me.", created_at: "2022-9-14 10:00AM", user_id: u2.id, post_id: p1.id )
+c2 = Comment.create(content: "Awesome!", created_at: "2022-9-16 10:00PM", user_id: u4.id, post_id: p2.id )
+
 
 puts "seeding done 🌱"

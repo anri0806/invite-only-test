@@ -13,7 +13,7 @@ function Post({ post, onClickDelete }) {
   return (
     <div>
       <br />
-      <p>{post.user.username}</p>
+      <p>{post.posted_by}</p>
       <p>{post.caption}</p>
       {post.picture === null ? null : (
         <img src={post.picture} width="300px" alt="" />
