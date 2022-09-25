@@ -6,7 +6,7 @@ function FeedPage({ currentUser }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("/posts")
+    fetch(`/group_posts/${currentUser.group_id}`)
       .then((res) => res.json())
       .then((posts) => setPosts(posts));
   }, [posts.id]);
@@ -29,9 +29,6 @@ function FeedPage({ currentUser }) {
       <p>This is Feed Page</p>
       <PostForm currentUser={currentUser} onSubmitAdd={renderNewPost} />
       <PostCard posts={sortedPosts} onClickDelete={handleDeletePost} />
-      {/* {sortedPosts.map((post) => (
-        <PostCard key={post.id} post={post} onClickDelete={handleDeletePost} />
-      ))} */}
     </>
   );
 }

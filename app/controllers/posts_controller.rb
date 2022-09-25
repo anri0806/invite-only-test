@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     skip_before_action :authorize, only: [:index, :show]
 
     def index
-        posts = Post.all
+        posts = Post.where(group_id: params[:id])
         render json: posts, status: :ok
     end
 
