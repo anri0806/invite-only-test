@@ -6,8 +6,13 @@ class CommentsController < ApplicationController
         render json: comments
     end
 
+    def group_comments
+        comments = Comment.where(group_id: params[:id])
+        render json: comments, status: :ok
+    end
+
     def show
-        comment = Commet.find_by(id: params[:id])
+        comment = Comment.find_by(id: params[:id])
         render json: comment, status: :ok
     end
 
@@ -22,12 +27,12 @@ class CommentsController < ApplicationController
 
     def update
         comment = Comment.find_by(id: params[:id])
+        updated_comment = comment.update(comment_params)
        
-        if comment
-            comment.update(comment_params)
-            render json: comment, include: :user, status: :created
+        if comment.valid?
+            render json: comment, status: :created
         else
-            render json: {error: "Comment not found"}, status: :not_found
+            render json: {errors: comment.errors.full_messages}, status: :unprocessable_entity
         end
     end
 
@@ -44,7 +49,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.permit(:content, :user_id, :post_id)
+        params.permit(:content, :user_id, :post_id, :group_id)
     end
 
 end

@@ -12,6 +12,7 @@ function PostForm({ currentUser, onSubmitAdd }) {
 
     const formData = new FormData();
     formData.append("user_id", currentUser.id);
+    formData.append("group_id", currentUser.group_id)
     formData.append("caption", caption);
     if (picture) formData.append("picture", picture);
 

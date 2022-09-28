@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
-  get "/group_posts/:id", to: "posts#index"
+  get "/group_posts/:id", to: "posts#group_posts"
+  get "/group_comments/:id", to: "comments#group_comments"
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 

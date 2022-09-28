@@ -1,16 +1,34 @@
 import Post from "./Post";
+import ReadOnlyComment from "./ReadOnlyComment";
 
-function PostCard({ posts, onClickDelete }) {
+function PostCard({
+  currentUser,
+  posts,
+  comments,
+  onSubmitAddCom,
+  onClickDelete,
+  onDeleteComment,
+  onEditComment
+}) {
   const postCards = posts.map((post) => (
-    <Post key={post.id} post={post} onClickDelete={onClickDelete} />
+    <div key={post.id}>
+      <Post
+        post={post}
+        currentUser={currentUser}
+        onClickDelete={onClickDelete}
+      />
+      <ReadOnlyComment
+        comments={comments}
+        currentUser={currentUser}
+        postId={post.id}
+        onSubmitAddCom={onSubmitAddCom}
+        onDeleteComment={onDeleteComment}
+        onEditComment={onEditComment}
+      />
+    </div>
   ));
 
-  return (
-    <>
-      {postCards}
-      {/* <Post post={post} onClickDelete={onClickDelete} /> */}
-    </>
-  );
+  return <>{postCards}</>;
 }
 
 export default PostCard;

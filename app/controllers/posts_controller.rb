@@ -2,6 +2,11 @@ class PostsController < ApplicationController
     skip_before_action :authorize, only: [:index, :show]
 
     def index
+        posts = Post.all
+        render json: posts
+    end
+
+    def group_posts
         posts = Post.where(group_id: params[:id])
         render json: posts, status: :ok
     end
@@ -34,7 +39,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.permit(:caption, :user_id, :picture)
+        params.permit(:caption, :user_id, :picture, :group_id)
     end
 
 end
