@@ -6,6 +6,11 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    def get_users
+        users = User.where(group_id: params[:id])
+        render json: users, status: :ok
+    end
+
     def show
         user = User.find_by(id: session[:user_id])
         if user
@@ -14,7 +19,6 @@ class UsersController < ApplicationController
             render json: {error: "Not authorized"}, status: :unauthorized
         end
     end
-
 
     def create
         user = User.create(user_params)

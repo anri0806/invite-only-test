@@ -11,6 +11,11 @@ class PostsController < ApplicationController
         render json: posts, status: :ok
     end
 
+    def user_posts
+        posts = Post.where(user_id: params[:id])
+        render json: posts, status: :ok
+    end
+
     def show
         post = Post.find_by(id: params[:id])
         render json: post, status: :ok

@@ -7,6 +7,11 @@ class GroupsController < ApplicationController
         render json: groups
     end
 
+    # def get_group
+    #     group = Group.find_by(id: params[:id])
+    #     render json: group, status: :ok
+    # end
+
     def show
         group = Group.find_by(id: params[:id])
         render json: group, status: :ok

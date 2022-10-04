@@ -11,7 +11,6 @@ function Post({ currentUser, post, onClickDelete }) {
 
   return (
     <div>
-      <p>---------------------</p>
       <p>{post.posted_by}</p>
       <p>{post.created_at}</p>
       <p>{post.caption}</p>

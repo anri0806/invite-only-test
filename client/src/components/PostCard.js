@@ -8,10 +8,13 @@ function PostCard({
   onSubmitAddCom,
   onClickDelete,
   onDeleteComment,
-  onEditComment
+  onEditComment,
 }) {
   const postCards = posts.map((post) => (
-    <div key={post.id}>
+    <div
+      key={post.id}
+      style={{ border: "2px solid black", margin: "5px", padding: "3px" }}
+    >
       <Post
         post={post}
         currentUser={currentUser}
