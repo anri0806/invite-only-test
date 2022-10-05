@@ -3,9 +3,11 @@ import { useState } from "react";
 import FeedPage from "./FeedPage";
 import UserProfilePage from "./UserProfilePage";
 import MemberList from "./MemberList";
+import Member from "./Member";
 
 function HomeContainer({ currentUser }) {
   const [posts, setPosts] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
 
   function renderNewPost(newPost) {
     setPosts([newPost, ...posts]);
@@ -15,9 +17,12 @@ function HomeContainer({ currentUser }) {
     setPosts(filteredPosts);
   }
 
+  function handleClickMember(member) {
+    setSelectedMember(member);
+  }
+
   return (
     <>
-      <h2>This is Home Container</h2>
       <Routes>
         <Route
           path="/"
@@ -39,7 +44,24 @@ function HomeContainer({ currentUser }) {
             />
           }
         />
-        <Route path="members" element={<MemberList />} />
+        <Route
+          path="members"
+          element={
+            <MemberList
+              currentUser={currentUser}
+              onClickedMember={handleClickMember}
+            />
+          }
+        />
+          <Route
+            path="/members/:userId"
+            element={
+              <Member
+                member={selectedMember}
+                onRenderFilteredPosts={renderFilteredPosts}
+              />
+            }
+          />
       </Routes>
     </>
   );

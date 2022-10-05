@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
-function NavBar({ currentUser, onLogout }) {
-
-
+function NavBar({ currentUser, onLogout, onClickShowList }) {
   function handleClick() {
     fetch("/logout", {
       method: "DELETE",
     }).then(() => onLogout());
   }
-
-
 
   return (
     <>

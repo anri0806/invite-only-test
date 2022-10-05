@@ -1,0 +1,23 @@
+import UserProfilePage from "./UserProfilePage";
+import { useParams, Link } from "react-router-dom";
+
+function Member({ member, onRenderFilteredPosts }) {
+  const { userId } = useParams();
+
+
+
+
+
+  return (
+    <>
+      <UserProfilePage
+        currentUser={member}
+        onRenderFilteredPosts={onRenderFilteredPosts}
+      />
+      <br />
+      <Link to="/members"  >Go back to members</Link>
+    </>
+  );
+}
+
+export default Member;
