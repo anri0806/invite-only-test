@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  
-  # Routing logic: fallback requests for React Router.
-  # Leave this here to help deploy your app later!
 
   resources :users, only: [:index]
   resources :posts, only: [:index, :show, :create, :destroy]
@@ -17,6 +14,16 @@ Rails.application.routes.draw do
   get "/user_posts/:id", to: "posts#user_posts"
   get "/get_users/:id", to: "users#get_users"
   # get "/get_group/:id", to: "groups#get_group"
+
+  devise_for :users, path: '', path_names: {
+    registration: 'signup',
+    invitation: 'users_invitations'
+  },
+  controllers: { 
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    invitations: 'users_invitations' 
+  }
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 

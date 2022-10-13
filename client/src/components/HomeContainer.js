@@ -4,6 +4,7 @@ import FeedPage from "./FeedPage";
 import UserProfilePage from "./UserProfilePage";
 import MemberList from "./MemberList";
 import Member from "./Member";
+import InviteUserPage from "./InviteUserPage";
 
 function HomeContainer({ currentUser }) {
   const [posts, setPosts] = useState([]);
@@ -53,15 +54,18 @@ function HomeContainer({ currentUser }) {
             />
           }
         />
-          <Route
-            path="/members/:userId"
-            element={
-              <Member
-                member={selectedMember}
-                onRenderFilteredPosts={renderFilteredPosts}
-              />
-            }
-          />
+        <Route
+          path="/members/:userId"
+          element={
+            <Member
+              member={selectedMember}
+              onRenderFilteredPosts={renderFilteredPosts}
+            />
+          }
+        />
+        {currentUser.admin ? (
+          <Route path="invite" element={<InviteUserPage />} />
+        ) : null}
       </Routes>
     </>
   );

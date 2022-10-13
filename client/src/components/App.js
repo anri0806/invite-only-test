@@ -3,11 +3,14 @@ import WelcomeContainer from "./WelcomeContainer";
 import HomeContainer from "./HomeContainer";
 import NavBar from "./NavBar";
 
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { useState, useEffect } from "react";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -18,14 +21,14 @@ function App() {
     });
   }, []);
 
-  
-
   function handleLogin(user) {
     setCurrentUser(user);
   }
 
   function handleLogout() {
     setCurrentUser(null);
+
+    navigate("/");
   }
 
   return (
@@ -34,11 +37,7 @@ function App() {
       {currentUser ? (
         <HomeContainer currentUser={currentUser} />
       ) : (
-        <WelcomeContainer
-          currentUser={currentUser}
-          onLogin={handleLogin}
-         
-        />
+        <WelcomeContainer currentUser={currentUser} onLogin={handleLogin} />
       )}
     </div>
   );

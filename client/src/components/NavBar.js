@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NavBar({ currentUser, onLogout, onClickShowList }) {
+function NavBar({ currentUser, onLogout }) {
   function handleClick() {
     fetch("/logout", {
       method: "DELETE",
@@ -13,6 +13,12 @@ function NavBar({ currentUser, onLogout, onClickShowList }) {
         <>
           <Link to="/">Feed</Link> | <Link to="profile">Profile</Link> |{" "}
           <Link to="members">Members</Link> |{" "}
+          {currentUser.admin ? (
+            <>
+              {" "}
+              <Link to="invite">Invite People</Link> |{" "}
+            </>
+          ) : null}
           <Link onClick={handleClick}>Logout</Link>
         </>
       ) : (

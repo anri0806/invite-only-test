@@ -2,10 +2,6 @@ import UserProfilePage from "./UserProfilePage";
 import { useParams, Link } from "react-router-dom";
 
 function Member({ member, onRenderFilteredPosts }) {
-  const { userId } = useParams();
-
-
-
 
 
   return (
